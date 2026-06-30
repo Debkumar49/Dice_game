@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------------------------------------------
+   Tokens
+--------------------------------------------- */
+:root {
+    --felt: #15463a;
+    --felt-dark: #0d2e26;
+    --felt-light: #1d5c4c;
+    --parchment: #f3e7d3;
+    --parchment-dim: #e7d8bd;
+    --gold: #c99a3c;
+    --gold-light: #e3bd6c;
+    --coral: #e0623f;
+    --ink: #20180f;
+    --ink-soft: #4a3f30;
+
+    --display: 'Fraunces', serif;
+    --body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body);
+    font-weight: 400;
+    min-height: 100vh;
+    color: var(--parchment);
+    background:
+        radial-gradient(ellipse at top left, var(--felt-light) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, var(--felt-dark) 0%, transparent 55%),
+        var(--felt);
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 96rem;
+    margin: 0 auto;
+}
+
+/* ---------------------------------------------
+   Topbar
+--------------------------------------------- */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.6rem;
+}
+
+.title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 2.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+}
+
+.rules {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background-color: var(--parchment);
+    border: none;
+    cursor: pointer;
+    padding: 0.9rem 1.8rem;
+    border-radius: 50rem;
+    box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rules:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 1.2rem 2rem rgba(0, 0, 0, 0.3);
+}
+
+.rules:focus-visible,
+.btn:focus-visible,
+.modal_close:focus-visible {
+    outline: 3px solid var(--gold-light);
+    outline-offset: 3px;
+}
+
+/* ---------------------------------------------
+   Modal
+--------------------------------------------- */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(13, 46, 38, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 5;
+    transition: opacity 0.2s ease;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(56rem, 88vw);
+    max-height: 85vh;
+    overflow-y: auto;
+    background-color: var(--parchment);
+    color: var(--ink);
+    padding: 3.6rem 3rem;
+    border-radius: 1.6rem;
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.modal_close {
+    position: absolute;
+    top: 1rem;
+    right: 1.4rem;
+    font-size: 3.2rem;
+    line-height: 1;
+    color: var(--ink-soft);
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.modal_close:hover {
+    color: var(--coral);
+}
+
+.heading {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 2.6rem;
+    margin-bottom: 1.6rem;
+    color: var(--felt);
+}
+
+.modal hr {
+    border: none;
+    border-top: 2px solid var(--parchment-dim);
+    margin-bottom: 1.8rem;
+}
+
+.content {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    padding-left: 2rem;
+}
+
+.content li {
+    margin-bottom: 1rem;
+}
+
+.content li:last-child {
+    margin-bottom: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ---------------------------------------------
+   Main table
+--------------------------------------------- */
+main {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: 2rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(243, 231, 211, 0.12);
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.15),
+        0 3rem 5rem rgba(0, 0, 0, 0.35);
+    border-radius: 2.4rem;
+    padding: 3rem 2rem;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    padding: 2.4rem 1.6rem;
+    border-radius: 1.8rem;
+    transition: background-color 0.5s ease, opacity 0.5s ease;
+    opacity: 0.55;
+}
+
+.player--active {
+    background-color: rgba(243, 231, 211, 0.08);
+    opacity: 1;
+}
+
+.name {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--parchment-dim);
+}
+
+.player--active .name {
+    font-weight: 600;
+    color: var(--gold-light);
+}
+
+.score {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(4.5rem, 8vw, 7rem);
+    line-height: 1;
+    color: var(--parchment);
+}
+
+.player--active .score {
+    font-weight: 500;
+    color: #fff;
+}
+
+.current {
+    background-color: var(--coral);
+    border-radius: 1rem;
+    color: #fff;
+    width: 100%;
+    max-width: 18rem;
+    padding: 1.4rem;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+}
+
+.player--active .current {
+    opacity: 1;
+}
+
+.current_label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.current_score {
+    font-family: var(--display);
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+/* ---------------------------------------------
+   Dice tray (center column)
+--------------------------------------------- */
+.dice-tray {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.4rem;
+    padding: 0 1rem;
+}
+
+.dice {
+    height: 8rem;
+    width: 8rem;
+    object-fit: contain;
+    background-color: var(--parchment);
+    border-radius: 1.2rem;
+    padding: 0.8rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.35);
+}
+
+.table-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    width: 16rem;
+}
+
+.btn {
+    color: var(--ink);
+    background-color: var(--parchment);
+    border: none;
+    font-family: var(--body);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 1rem 1.6rem;
+    border-radius: 50rem;
+    box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 1rem 1.8rem rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--roll {
+    background-color: var(--gold);
+    color: var(--ink);
+}
+
+.btn--roll:hover {
+    background-color: var(--gold-light);
+}
+
+.btn--hold {
+    background-color: var(--felt-light);
+    color: var(--parchment);
+}
+
+.btn--hold:hover {
+    background-color: #246a56;
+}
+
+/* ---------------------------------------------
+   Winner state
+--------------------------------------------- */
+.player--winner {
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+}
+
+.player--winner .name {
+    font-weight: 700;
+    color: var(--gold-light);
+}
+
+.player--winner .score {
+    color: var(--gold-light);
+}
+
+/* ---------------------------------------------
+   Responsive
+--------------------------------------------- */
+@media (max-width: 800px) {
+    main {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "p0 p1"
+            "tray tray";
+        padding: 2.4rem 1.6rem;
+    }
+
+    .player_0 { grid-area: p0; }
+    .player_1 { grid-area: p1; }
+    .dice-tray { grid-area: tray; }
+
+    .table-controls {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .btn {
+        flex: 1;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 520px) {
+    html { font-size: 56%; }
+
+    .topbar {
+        margin-bottom: 1.2rem;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "p0"
+            "tray"
+            "p1";
+        gap: 1.4rem;
+        padding: 2rem 1.4rem;
+    }
+
+    .player {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        padding: 1.6rem;
+    }
+
+    .name {
+        font-size: 1.6rem;
+    }
+
+    .score {
+        font-size: clamp(3.6rem, 14vw, 5rem);
+    }
+
+    .current {
+        max-width: 12rem;
+        padding: 1rem;
+    }
+
+    .table-controls {
+        flex-direction: column;
+    }
+
+    .modal {
+        padding: 2.8rem 2rem;
+    }
+}

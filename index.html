@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 Roll the Dice 🎲</title>
+    <link rel="stylesheet" href="pig.css" />
+    <link rel="icon" type="image/x-icon" href="/678gamedice_100992.ico">
+</head>
+<body>
+    <div class="container">
+
+        <div class="overlay hidden"></div>
+        <div class="modal hidden">
+            <button class="modal_close" aria-label="Close rules">&times;</button>
+            <h1 class="heading">Rules of the game</h1>
+            <hr>
+            <ol class="content">
+                <li>Roll the dice — its value becomes your current score for the turn.</li>
+                <li>Keep rolling to add to your current score.</li>
+                <li>Roll a <strong>1</strong> and you lose your current score, then play passes to the other player.</li>
+                <li>Press <strong>Hold</strong> to bank your current score onto your total, then play passes.</li>
+                <li>First player to reach <strong>100 points</strong> wins the game.</li>
+            </ol>
+        </div>
+
+        <header class="topbar">
+            <p class="title">Pig</p>
+            <button class="rules">Rules</button>
+        </header>
+
+        <main>
+            <section class="player player_0 player--active">
+                <h2 class="name" id="name_0">Player 1</h2>
+                <p class="score" id="score_0">0</p>
+                <div class="current">
+                    <p class="current_label">Current score</p>
+                    <p class="current_score" id="current_0">0</p>
+                </div>
+            </section>
+
+            <div class="dice-tray">
+                <img src="dice-2.png" alt="playing dice" class="dice hidden" />
+                <div class="table-controls">
+                    <button class="btn btn--new">New game</button>
+                    <button class="btn btn--roll">Roll dice</button>
+                    <button class="btn btn--hold">Hold</button>
+                </div>
+            </div>
+
+            <section class="player player_1">
+                <h2 class="name" id="name_1">Player 2</h2>
+                <p class="score" id="score_1">0</p>
+                <div class="current">
+                    <p class="current_label">Current score</p>
+                    <p class="current_score" id="current_1">0</p>
+                </div>
+            </section>
+        </main>
+
+    </div>
+    <script src="pig.js"></script>
+</body>
+</html>
